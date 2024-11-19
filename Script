@@ -1,0 +1,13 @@
+_vMedidas:
+LOAD
+    Variavel,
+    Formula
+FROM [lib://$(vFolder)/Medidas.xlsx]
+(ooxml, embedded labels, table is KPI);
+
+FOR i=0 to NoOfRows('_vMedidas')-1
+	_vVariavel = Peek('Variavel',i);
+	_vFormula = Replace(Peek('Formula',i),'$','!@#%');
+    
+    "$(_vVariavel)"=Replace('$(_vFormula)','!@#%',Chr(36));
+Next
